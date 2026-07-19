@@ -1,5 +1,5 @@
 from menu import *
-
+from funciones import *
 while True:
     menu()
     opcion = input("ingrese una opcion del menu ->")
@@ -8,37 +8,37 @@ while True:
             menu_libros()
             opcion = input("ingrese una opcion del menu ->")
             if opcion == "1":
-                pass
+                ingreso_libro_nuevo()
             elif opcion == "2":
-                pass
+                eliminar_libro()
             elif opcion == "3":
                 while True:
                     menu_editar_libro()
                     opcion = input("ingrese una opcion del menu ->")
                     if opcion == "1":
-                        pass
+                        editar_codigo()
                     elif opcion == "2":
-                        pass
+                        editar_entrada("genero")
                     elif opcion == "3":
-                        pass
+                        editar_entrada("autor")
                     elif opcion == "4":
-                        pass
+                        editar_copias()
                     elif opcion == "5":
-                        pass
+                        editar_valor_unitario()
                     elif opcion == "6":
                         print("volver al menu principal")
                         break
                     else:
                         print("ingrese una opcion valida")
             elif opcion == "4":
-                pass
+                listar_libros()
             elif opcion == "5":
                 print("volver al menu principal")
                 break
             else:
                 print("ingrese una opcion valida")
     elif opcion == "2":
-        pass
+        compra_libros()
     elif opcion == "3":
         while True:
             opcion = input("ingrese una opcion del menu ->")

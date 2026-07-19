@@ -23,7 +23,7 @@ def menu_libros():
     
 def menu_editar_libro():
     print("""
-                1.Cambiar nombre
+                1.Cambiar codigo
                 2.Cambiar genero
                 3.Cambiar autor
                 4.Cambiar cantidad de copias
