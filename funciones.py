@@ -168,8 +168,34 @@ def listar_libros():
         #de su categoria par buscar el valor necesario, se anota con ''
         contador += 1 
 def registro_clientes():
-    pass
+    id_cliente = input("registre identificacion o rut del cliente: ").strip().lower()
+    #strip es como el trim que se usa en excel para eliminar espacios en blanco al
+    # final y al prinicipio, suena bastante util
+    if id_cliente == "":
+        id_cliente = "cliente"
+        return id_cliente
+
+    if id_cliente in clientes:
+        print(f"-> cliente ya registrado: {id_cliente.upper()}")
+    else:
+        clientes.add(id_cliente)
+        print(f"-> cliente nuevo guardado en sistema: {id_cliente.upper()}")
+    
+    return id_cliente
+    
+def lista_clientes():
+    if len(clientes) == 0:
+        print("No hay clientes registrados aun.")
+        return
+    
+    contador = 1
+    for cliente in clientes:
+        print(f"{contador}. ID/RUT: {cliente.upper()}")
+        contador += 1
+
 def compra_libros():
+    #cada vez que se realize una compra nueva, se tiene que limpiar la lista anterior de compras
+    compra.clear()
     while True:
         for clave, valor in libro_inventario.items():
             print(f"-{clave}--{valor['nombre'].upper()}--{valor['valor unitario']}--{valor['stock']}")
@@ -177,15 +203,44 @@ def compra_libros():
             ingreso_compra = input("ingrese codigo de libro a comprar, escriba 1 para terminar: ")
             if ingreso_compra == "1":
                 if len(compra) > 0:
-                #en realidad aca podria hacer un f-string y ordenar la lista de compras
-                    print(compra)
+                    valor_neto_acumulado = 0
+                    contador = 1
+                    # compra guarda codigo de mi diccionario
+                    for codigo_comprado in compra:
+                        #aca se compara el codigo de mi diccionario con el de la lista
+                        libro = libro_inventario[codigo_comprado]
+                        costo_unitario_con_iva = libro['valor unitario'] * iva_constante[0]
+                        iva_solo = libro['valor unitario'] * iva_constante[1]
+
+                        print(f" {contador}. LIBRO: {libro['nombre'].upper()}")
+                        print(f"    Coste Unitario Neto: ${libro['valor unitario']}")
+                        print(f"    Coste Unitario c/IVA: ${round(costo_unitario_con_iva, 2)}")
+                        #round es para reducir el resultado a 2 decimales
+                        print(f"    Valor Iva: ${round(iva_solo, 2)}")
+                        print(f"    Subtotal: ${libro['valor unitario']}")
+                        valor_neto_acumulado += libro['valor unitario']
+                        contador += 1
+                        #total
+                    total_impuesto_iva = valor_neto_acumulado * iva_constante[1]
+                    valor_total_pagar = valor_neto_acumulado * iva_constante[0]
+                    
+                    print(f" TOTAL NETO:         ${valor_neto_acumulado}")
+                    print(f" TOTAL IMPUESTO IVA: ${round(total_impuesto_iva,2)}")
+                    print(f" TOTAL A PAGAR:      ${round(valor_total_pagar, 2)}")
+                    registro_clientes()                    
                     return compra
                 else:
-                    print("no hay productos registrados")
+                    print("no hay productos registrados en el carrito.")
                     return 
-            if ingreso_compra == clave:
+            if ingreso_compra in libro_inventario and libro_inventario[ingreso_compra]["stock"] > 0:
                 compra.append(ingreso_compra)
-                print
+                print(f"->compra{compra}")
+                cambio_stock = libro_inventario[ingreso_compra]["stock"] - 1
+                cambio_iva_total = libro_inventario[ingreso_compra]["valor unitario"] * iva_constante[0] * cambio_stock
+                libro_inventario[ingreso_compra].update({
+                "stock" : cambio_stock,
+                "valor total con IVA": cambio_iva_total
+                })
             else:
                 print("libro no se encuentra en el inventario disponible!")
-                break
+                

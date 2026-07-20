@@ -40,8 +40,7 @@ while True:
     elif opcion == "2":
         compra_libros()
     elif opcion == "3":
-        while True:
-            opcion = input("ingrese una opcion del menu ->")
+            lista_clientes()
     elif opcion == "4":
         print("Cerrando programa")
         break
