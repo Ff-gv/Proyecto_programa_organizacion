@@ -1,0 +1,36 @@
+#menu principal
+    #administrar libros
+        #aca redirige a menu libro
+            #menu libro
+                #agregar libros
+                    #debe tener validacion si existe, si no, entonces se agrega
+                    #como se podria hacer el contador? deberia ser simple, 
+                    #pero no debe ser clave sino parte de los valores
+                    #se podria generar un valor al azar o que la persona lo haga...
+                    #quizas la pista este en la libreria python o buscar informacion
+                    #en internet acerca de eso, me imagino que podria colocar un limite
+                    #de caracteres al codigo
+                        #se agrega nombre, autor, genero, cantidad de copias y valor unitario 
+                #eliminar libro
+                    #validacion si libro existe, se procede a eliminar el dato completo
+                #editar datos libros
+                    #se debe realizar validacion si existe, si existe
+                    #se puede crear un menu donde se elije que dato se 
+                    # quiere cambiar y se sobreescribe
+                #ver lista de libros
+                    #tiene que ser una coleccion diccionario con todos 
+                    #sus datos mostrados en pantalla
+                #agregar una opcion volver
+    #comprar libro
+        #aca se deberia hacer una lista donde se suma cada libro que se va anotando y
+        #su cantidad a comprar, se calcula el iva tambien.
+            #se podria colocar un resumen en la compra y dar la oportunidad de editar la compra
+            #pero si es asi se deberia hacer un limite en la cantidad de libros ya que la lista seria muy
+            #larga?
+            #colocar una iteracion para enumerar las entradas y borrar cuando no se quiera llevar un determinado
+            #libro
+    #registro de clientes
+        #se puede usar una coleccion como un conjunto para mostrar datos no repetidos
+        #ya que un cliente es unico
+    #salir
+
