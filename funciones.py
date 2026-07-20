@@ -243,4 +243,17 @@ def compra_libros():
                 })
             else:
                 print("libro no se encuentra en el inventario disponible!")
-                
+def login():
+    intento = 3
+    for i in range(intento):
+        usuario = input("ingrese nombre de usuario: ")
+        clave = input("ingrese la clave: ")
+        if usuario == "admin" and clave == "404":
+            print("ingreso exitoso, redirigiendo a menu principal.")
+            return 1
+        else:
+            intento -= 1
+            print(f"ingreso erroneo, se realizo {i + 1} intentos de 3")
+    else:
+        print("no quedan intentos restantes, cerrando programa")
+        return 0
